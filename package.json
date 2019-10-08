@@ -1,0 +1,41 @@
+{
+  "name": "@moxy/next-webpack-oneof",
+  "version": "0.0.0",
+  "description": "Wraps all webpack loader rules into a single oneOf rule. ",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage",
+    "lint": "eslint .",
+    "prerelease": "npm t && npm run lint",
+    "release": "standard-version"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moxystudio/next-webpack-oneof.git"
+  },
+  "keywords": [
+    "webpack",
+    "next",
+    "nextjs",
+    "plugin",
+    "loader",
+    "rules",
+    "oneof"
+  ],
+  "author": "João Silva <joao.silva@moxy.studio>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/moxystudio/next-webpack-oneof/issues"
+  },
+  "homepage": "https://github.com/moxystudio/next-webpack-oneof#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-conventional": "^8.2.0",
+    "eslint": "^6.5.1",
+    "eslint-config-moxy": "^8.0.0",
+    "husky": "^3.0.8",
+    "jest": "^24.9.0",
+    "lint-staged": "^9.4.2",
+    "standard-version": "^7.0.0"
+  }
+}
