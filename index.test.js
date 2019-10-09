@@ -24,6 +24,7 @@ it('should return in .oneOf rules sent in .rules', () => {
 
     const webpackConfig = alwaysOneOf().webpack(createConfig(rules));
 
+    expect(webpackConfig).toMatchSnapshot();
     expect(webpackConfig).toStrictEqual(createOneOf(rules));
 });
 

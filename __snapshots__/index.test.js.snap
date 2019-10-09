@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should return in .oneOf rules sent in .rules 1`] = `
+Object {
+  "module": Object {
+    "rules": Array [
+      Object {
+        "oneOf": Array [
+          Object {
+            "should": "work",
+          },
+        ],
+      },
+    ],
+  },
+}
+`;
