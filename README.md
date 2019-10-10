@@ -16,9 +16,9 @@
 
 Wraps all webpack loader rules into a single oneOf rule.
 
-By default webpack loaders will test all files for all loaders. However, webpack does support [`oneOf` rules](https://webpack.js.org/configuration/module/#ruleoneof), with which only the first matching rule will be used.
+By default webpack loaders will test all files for all loaders. However, webpack does support [`oneOf` rules](https://webpack.js.org/configuration/module/#ruleoneof), within which only the first matching rule will be used.
 
-This plugin transfers all rules into a single `oneOf` rule, so no file can be tested twice.
+This plugin transfers all rules into a single `oneOf` rule, so no file will match more than one condition.
 
 
 ## Installation
@@ -53,7 +53,7 @@ This, in effect, changes how to think about loaders as **the order of loaders be
 
 ## Examples
 
-In the following example, two loaders are used for SVG files: one default loader, and one loader for specific SVG files with `.base64.` somewhere in their filename. Webpack test files against loaders from the bottom up, so **rules with more specificity should be written bellow more general rules**. In practice, SVG files with a `.base64.` suffix will be caught by the first (read: bottom) rule, and those without will fallback to the consequent rule.
+In the following example, two loaders are used for SVG files: one default loader, and one loader for specific SVG files with `.base64.` somewhere in their filename. Webpack parses the rules sent in its configuration file from the bottom up, so **rules with more specificity should be written bellow more general rules**, as shown in this example. In practice, SVG files with a `.base64.` suffix will be caught by the first (read: bottom) rule, and those without will fallback to the consequent rule (read: above).
 
 ```js
 {
