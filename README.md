@@ -28,49 +28,166 @@ $ npm install --save @moxy/next-webpack-oneof
 ```
 
 
+## Motivation
+
+In webpack loaders, rules to match against filenames are typically structured with the expectation that all files will try to match against all rules. With simple configurations this is not an issue, but can become problematic as complexity grows and, for example, you need different loaders for similar files.
+
+As it is, the solution is using complex pairs of `include`/`exclude` in the rules. As the complexity of this problem grows, however, implementing these exclusion rules will get more confusing and become a hassle. To avoid this, files would have to **skip all rule matching tests after their first match**, to guarantee that no file matches against more than one rule by default.
+
+Webpack implements a type of rule where that already happens, [`Rule.oneOf`](https://webpack.js.org/configuration/module/#ruleoneof), within which only the first matching rule will be used. But we want this that to be the default behavior.
+
+
+## How
+
+This plugin operates directly on the configuration object and pulls all rules into one single oneOf rule so that it becomes the default behavior for all rules.
+
+This, in effect, changes how to think about loader rules as **the order of rules becomes of imperative importance**.
+
+In `Next.js` you can use function composition to bundle together multiple operations on your webpack configuration. Given the nature of function composition, the order of execution is inverse to the nesting degree of each function call. As it concerns this plugin, because you always want this plugin to be the last function to be called, **it must be the topmost function in your composition** to guarantee that it has access on all loader rules in your project.
+
+
 ## Usage
 
 In your `next.config.js` file:
 
 ```js
-const alwaysOneOf = require('@moxy/next-webpack-oneof');
+//next.config.js
+const withOneOf = require('@moxy/next-webpack-oneof');
 
-module.exports = alwaysOneOf({...nextConfig});
+module.exports = withOneOf({ ...nextConfig };
 ```
 
-This plugin must be passed as the first loader rule in your `next.config.js` file, as it works by spreading rules already present in your webpack `config` into a `oneOf` object, and must be placed where it will have access to all rules, which, as per the webpack implementation (explained further below), is **before** the rest of your rules in your exporting object.
+Multiple configurations can be combined together with function composition. However, as explained above, this plugin must be the topmost function call. For example:
 
-## Why
+```js
+// next.config.js
+const withOneOf = require('@moxy/next-webpack-oneof');
+const withCSS = require('@zeit/next-css');
 
-In webpack loaders, rules to match against filenames are typically structured with the expectation that all files will try to match against all rules. With simple configurations this is not an issue, but can become problematic as complexity grows and, for example, you need different loaders for similar files.
+module.exports = withOneOf(
+    withCSS({
+        cssModules: true,
+    }),
+);
+```
 
-As it is, the solution is using complex pairs of `include`/`exclude` in the rules. To avoid this, files would have to skip all rule matching tests after their first match.
+To simplify using multiple plugins, you can also use [`next-compose-plugins`](https://github.com/cyrilwanner/next-compose-plugins). The examples in this document will use `next-compose-plugins`. As with the example above, `next-webpack-oneof` must be the topmost object. For example:
 
-Webpack implements a type of rule where that already happens, [`Rule.oneOf`](https://webpack.js.org/configuration/module/#ruleoneof), within which only the first matching rule will be used. This plugin **pulls all rules into one single oneOf rule** so that it becomes the **default behavior for all files.**
+```js
+//next.config.js
+const withPlugins = require('next-compose-plugins');
+const withOneOf = require('@moxy/next-webpack-oneof');
+const withCSS = require('@zeit/next-css');
 
-This, in effect, changes how to think about loaders as **the order of loaders becomes of imperative importance**, and as such it's required of the developer to have some awareness of how rules are loaded into webpack, namely **from the bottom up**.
+module.exports = withPlugins([
+    withOneOf,
+    [withCSS, {
+        cssModules: true,
+    }],
+]);
+```
 
 
 ## Examples
 
-In the following example, two loaders are used for SVG files: one default loader, and one loader for specific SVG files with `.base64.` somewhere in their filename. Webpack parses the rules sent in its configuration file from the bottom up, so **rules with more specificity should be written bellow more general rules**, as shown in this example. In practice, SVG files with a `.base64.` suffix will be caught by the first (read: bottom) rule, and those without will fallback to the consequent rule (read: above).
+In the following examples, two loaders are used for .png files: one default loader, and one loader for specific .png files with `.base64.` somewhere in their filename.
+
+### Without `next-webpack-oneof`
+
+Using the standard webpack implementation, you would write the rules like so:
 
 ```js
-{
-    // General rule to catch all SVG files
-    test: /\.svg$/,
-    loader: 'some-loader',
-},
-{
-    // More specific rule to catch SVG files that also match the `include` pattern
-    test: /\.svg$/,
-    include: /\.base64\./
-    loader: 'some-base64-loader,
-},
+// Without 'next-webpack-oneof'
+const withPlugins = require('next-compose-plugins');
+
+withPlugins([
+    {
+        webpack(config) {
+            config.module.rules.push({
+                // More specific rule to catch .png files that also match the `include` pattern
+                test: /\.png$/,
+                include: /\.base64\./
+                loader: 'some-base64-loader,
+            });
+
+            config.module.rules.push({
+                // General rule to catch all png files
+                // Exclude files with '.base64.' in their filename
+                test: /\.png$/,
+                exclude: /\.base64\./
+                loader: 'some-loader',
+            });
+        },
+    },
+])
+```
+
+To avoid confusing and introducing conflicts in this configuration, you must use a combination of `include` and `exclude` to guarantee that files don't fall through to multiple loaders.
+
+### With `next-webpack-oneof`
+
+Using `next-webpack-oneof` you can avoid having to declare complex rule exclusions, but you must be careful with the order of your rules. These examples explore how to use this plugin, and explain how the order of rules changes in different contexts.
+
+If you're setting multiple rules in one plugin, the rules inside will output with the same order as they're written in. When you can expect this to be the case, rules with more specificity should be written before more general rules, like in this example:
+
+```js
+// With 'next-webpack-oneof'
+const withPlugins = require('next-compose-plugins');
+const withOneOf = require('@moxy/next-webpack-oneof');
+
+withPlugins([
+    withOneOf,
+    {
+        webpack(config) {
+            // More specific rule to catch .png files that also match the `include` pattern
+            config.module.rules.push({
+                test: /\.png$/,
+                include: /\.base64\./
+                loader: 'some-base64-loader,
+            });
+
+            // General rule to catch all png files
+            config.module.rules.push({
+                test: /\.png$/,
+                loader: 'some-loader',
+            });
+        },
+    },
+])
+```
+
+However, if you're setting rules in different plugins, the bottommost plugin will execute first, with order of execution going upwards from that point. In this case, plugins with rules with more specificity should be below plugins with more general rules, like in this example:
+
+```js
+// With 'next-webpack-oneof'
+const withPlugins = require('next-compose-plugins');
+const withOneOf = require('@moxy/next-webpack-oneof');
+
+withPlugins([
+    withOneOf,
+    {
+        webpack(config) {
+            config.module.rules.push({
+                // General rule to catch all png files
+                test: /\.png$/,
+                loader: 'some-loader',
+            });
+        },
+    },
+    {
+        webpack(config) {
+            config.module.rules.push({
+                // More specific rule to catch .png files that also match the `include` pattern
+                test: /\.png$/,
+                include: /\.base64\./
+                loader: 'some-base64-loader,
+            });
+    },
+})
 ```
 
 
-### Tests
+## Tests
 
 Any parameter passed to the `test` command is passed down to Jest.
 
@@ -79,6 +196,6 @@ $ npm t
 $ npm t -- --watch  # To run watch mode
 ```
 
-### License
+## License
 
 Released under the [MIT License](https://opensource.org/licenses/mit-license.php).
