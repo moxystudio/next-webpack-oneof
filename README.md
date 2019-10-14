@@ -97,7 +97,7 @@ withPlugins([
             config.module.rules.push({
                 // More specific rule to catch .png files that also match the `include` pattern
                 test: /\.png$/,
-                include: /\.base64\./
+                include: /\.base64\./,
                 loader: 'some-base64-loader,
             });
 
