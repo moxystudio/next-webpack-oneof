@@ -48,15 +48,6 @@ In `Next.js` you can use function composition to bundle together multiple operat
 
 ## Usage
 
-In your `next.config.js` file:
-
-```js
-//next.config.js
-const withOneOf = require('@moxy/next-webpack-oneof');
-
-module.exports = withOneOf({ ...nextConfig };
-```
-
 Multiple configurations can be combined together with function composition. However, as explained above, this plugin must be the topmost function call. For example:
 
 ```js
