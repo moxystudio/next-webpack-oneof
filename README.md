@@ -98,14 +98,14 @@ withPlugins([
                 // More specific rule to catch .png files that also match the `include` pattern
                 test: /\.png$/,
                 include: /\.base64\./,
-                loader: 'some-base64-loader,
+                loader: 'some-base64-loader',
             });
 
             config.module.rules.push({
                 // General rule to catch all png files
                 // Exclude files with '.base64.' in their filename
                 test: /\.png$/,
-                exclude: /\.base64\./
+                exclude: /\.base64\./,
                 loader: 'some-loader',
             });
         },
@@ -133,8 +133,8 @@ withPlugins([
             // More specific rule to catch .png files that also match the `include` pattern
             config.module.rules.push({
                 test: /\.png$/,
-                include: /\.base64\./
-                loader: 'some-base64-loader,
+                include: /\.base64\./,
+                loader: 'some-base64-loader',
             });
 
             // General rule to catch all png files
@@ -170,8 +170,8 @@ withPlugins([
             config.module.rules.push({
                 // More specific rule to catch .png files that also match the `include` pattern
                 test: /\.png$/,
-                include: /\.base64\./
-                loader: 'some-base64-loader,
+                include: /\.base64\./,
+                loader: 'some-base64-loader',
             });
     },
 })
