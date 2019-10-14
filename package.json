@@ -1,18 +1,22 @@
 {
   "name": "@moxy/next-webpack-oneof",
   "version": "0.0.0",
-  "description": "Wraps all webpack loader rules into a single oneOf rule. ",
+  "description": "Wraps all webpack loader rules into a single oneOf rule.",
   "main": "index.js",
   "scripts": {
     "test": "jest --coverage",
     "lint": "eslint .",
     "prerelease": "npm t && npm run lint",
-    "release": "standard-version"
+    "release": "standard-version",
+    "postrelease": "git push --follow-tags origin master && npm publish"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/moxystudio/next-webpack-oneof.git"
   },
+  "files": [
+    "!**.test.js"
+  ],
   "keywords": [
     "webpack",
     "next",
