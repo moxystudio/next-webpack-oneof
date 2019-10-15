@@ -28,7 +28,7 @@ it('should return in .oneOf rules sent in .rules', () => {
     expect(webpackConfig).toStrictEqual(createOneOf(rules));
 });
 
-it('should return a function if next config is a function', () => {
+it('should call nextConfig webpack if defined', () => {
     const nextConfig = {
         webpack: jest.fn(() => 'foo'),
     };
