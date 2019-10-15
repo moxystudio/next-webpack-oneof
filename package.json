@@ -14,9 +14,7 @@
     "type": "git",
     "url": "git+https://github.com/moxystudio/next-webpack-oneof.git"
   },
-  "files": [
-    "!**.test.js"
-  ],
+  "files": [],
   "keywords": [
     "webpack",
     "next",
