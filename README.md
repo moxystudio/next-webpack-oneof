@@ -43,7 +43,7 @@ This plugin operates directly on the configuration object and pulls all rules in
 
 This, in effect, changes how to think about loader rules as **the order of rules becomes of imperative importance**.
 
-In `Next.js` you can use function composition to bundle together multiple operations on your webpack configuration. Given the nature of function composition, the order of execution is inverse to the nesting degree of each function call. As it concerns this plugin, because you always want this plugin to be the last function to be called, **it must be the topmost function in your composition** to guarantee that it has access on all loader rules in your project.
+In `Next.js` you can use function composition to bundle together multiple operations on your webpack configuration. Given the nature of function composition, the order of execution is inverse to the nesting degree of each function call. As it concerns this plugin, because you always want this plugin to be the last function to be called, **it must be the topmost function in your composition** to guarantee that it has access to all loader rules in your project.
 
 
 ## Usage
@@ -81,7 +81,7 @@ module.exports = withPlugins([
 
 ## Examples
 
-In the following examples, two loaders are used for .png files: one default loader, and one loader for specific .png files with `.base64.` somewhere in their filename.
+In the following examples, two loaders are used for `.png` files: one default loader, and one loader for specific `.png` files with `.base64.` somewhere in their filename.
 
 ### Without `next-webpack-oneof`
 
@@ -102,7 +102,7 @@ withPlugins([
             });
 
             config.module.rules.push({
-                // General rule to catch all png files
+                // General rule to catch all .png files
                 // Exclude files with '.base64.' in their filename
                 test: /\.png$/,
                 exclude: /\.base64\./,
@@ -137,7 +137,7 @@ withPlugins([
                 loader: 'some-base64-loader',
             });
 
-            // General rule to catch all png files
+            // General rule to catch all .png files
             config.module.rules.push({
                 test: /\.png$/,
                 loader: 'some-loader',
@@ -159,7 +159,7 @@ withPlugins([
     {
         webpack(config) {
             config.module.rules.push({
-                // General rule to catch all png files
+                // General rule to catch all .png files
                 test: /\.png$/,
                 loader: 'some-loader',
             });
