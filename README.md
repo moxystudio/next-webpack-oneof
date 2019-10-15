@@ -39,7 +39,7 @@ Webpack implements a type of rule where that already happens, [`Rule.oneOf`](htt
 
 ## How
 
-This plugin operates directly on the configuration object and pulls all rules into one single oneOf rule so that it becomes the default behavior for all rules.
+This plugin operates directly on the configuration object and wraps all rules into one single oneOf rule so that it becomes the default behavior for all rules.
 
 This, in effect, changes how to think about loader rules as **the order of rules becomes of imperative importance**.
 
