@@ -1,6 +1,6 @@
 {
   "name": "@moxy/next-webpack-oneof",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Wraps all webpack loader rules into a single oneOf rule.",
   "main": "index.js",
   "scripts": {
