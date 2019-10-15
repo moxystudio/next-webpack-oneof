@@ -34,7 +34,7 @@ In webpack loaders, rules to match against filenames are typically structured wi
 
 As it is, the solution is using complex pairs of `include`/`exclude` in the rules. As the complexity of this problem grows, however, implementing these exclusion rules will get more confusing and become a hassle. To avoid this, files would have to **skip all rule matching tests after their first match**, to guarantee that no file matches against more than one rule by default.
 
-Webpack implements a type of rule where that already happens, [`Rule.oneOf`](https://webpack.js.org/configuration/module/#ruleoneof), within which only the first matching rule will be used. But we want this that to be the default behavior.
+Webpack implements a type of rule where that already happens, [`Rule.oneOf`](https://webpack.js.org/configuration/module/#ruleoneof), within which only the first matching rule will be used. We want this to be the default behavior.
 
 
 ## How
