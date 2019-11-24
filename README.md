@@ -6,7 +6,7 @@
 [downloads-image]:https://img.shields.io/npm/dm/@moxy/next-webpack-oneof.svg
 [npm-image]:https://img.shields.io/npm/v/@moxy/next-webpack-oneof.svg
 [travis-url]:https://travis-ci.org/moxystudio/next-webpack-oneof
-[travis-image]:http://img.shields.io/travis/moxystudio/next-webpack-oneof/master.svg
+[travis-image]:https://img.shields.io/travis/moxystudio/next-webpack-oneof/master.svg
 [codecov-url]:https://codecov.io/gh/moxystudio/next-webpack-oneof
 [codecov-image]:https://img.shields.io/codecov/c/github/moxystudio/next-webpack-oneof/master.svg
 [david-dm-url]:https://david-dm.org/moxystudio/next-webpack-oneof
