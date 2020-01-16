@@ -1,5 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`should add condition to Next.js built-in oneOf rule that adds CSS support 1`] = `
+Object {
+  "module": Object {
+    "rules": Array [
+      Object {
+        "oneOf": Array [
+          Object {
+            "oneOf": Array [
+              Object {
+                "test": /\\\\\\.module\\\\\\.css\\$/,
+              },
+            ],
+            "test": /\\\\\\.css\\$/,
+          },
+        ],
+      },
+    ],
+  },
+}
+`;
+
 exports[`should return in .oneOf rules sent in .rules 1`] = `
 Object {
   "module": Object {
@@ -7,7 +28,7 @@ Object {
       Object {
         "oneOf": Array [
           Object {
-            "should": "work",
+            "test": /\\\\\\.js\\$/,
           },
         ],
       },
