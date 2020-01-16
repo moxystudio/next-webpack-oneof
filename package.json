@@ -8,7 +8,7 @@
   "description": "Wraps all webpack loader rules into a single oneOf rule.",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage",
+    "test": "jest",
     "lint": "eslint .",
     "prerelease": "npm t && npm run lint",
     "release": "standard-version",
@@ -33,9 +33,10 @@
   "devDependencies": {
     "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^8.2.0",
+    "@moxy/eslint-config": "^10.1.0",
+    "@moxy/jest-config": "^1.2.0",
     "eslint": "^6.5.1",
-    "eslint-config-moxy": "^9.1.0",
-    "husky": "^3.0.8",
+    "husky": "^4.0.10",
     "jest": "^24.9.0",
     "lint-staged": "^9.4.2",
     "standard-version": "^7.0.0"
