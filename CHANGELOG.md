@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.1](https://github.com/moxystudio/next-webpack-oneof/compare/v1.1.0...v1.1.1) (2021-06-24)
+
+
+### Bug Fixes
+
+* add noop svg rule if a svg rule is present ([423d23e](https://github.com/moxystudio/next-webpack-oneof/commit/423d23e7ef33cef7b467e85ced5efb23e6cc2457))
+
 ## [1.1.0](https://github.com/moxystudio/next-webpack-oneof/compare/v1.0.2...v1.1.0) (2021-06-24)
 
 
