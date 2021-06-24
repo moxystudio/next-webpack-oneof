@@ -5,8 +5,8 @@
 [npm-url]:https://npmjs.org/package/@moxy/next-webpack-oneof
 [downloads-image]:https://img.shields.io/npm/dm/@moxy/next-webpack-oneof.svg
 [npm-image]:https://img.shields.io/npm/v/@moxy/next-webpack-oneof.svg
-[build-status-url]:https://github.com/moxystudio/postcss-preset/actions
-[build-status-image]:https://img.shields.io/github/workflow/status/moxystudio/postcss-preset/Node%20CI/master
+[build-status-url]:https://github.com/moxystudio/next-webpack-oneof/actions
+[build-status-image]:https://img.shields.io/github/workflow/status/moxystudio/next-webpack-oneof/Node%20CI/master
 [codecov-url]:https://codecov.io/gh/moxystudio/next-webpack-oneof
 [codecov-image]:https://img.shields.io/codecov/c/github/moxystudio/next-webpack-oneof/master.svg
 [david-dm-url]:https://david-dm.org/moxystudio/next-webpack-oneof
