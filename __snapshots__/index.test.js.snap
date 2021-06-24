@@ -21,6 +21,28 @@ Object {
 }
 `;
 
+exports[`should not wrap rule that has \`resolve.fullySpecified = false\` 1`] = `
+Object {
+  "module": Object {
+    "rules": Array [
+      Object {
+        "resolve": Object {
+          "fullySpecified": false,
+        },
+        "test": /\\\\\\.m\\?js/,
+      },
+      Object {
+        "oneOf": Array [
+          Object {
+            "test": /\\\\\\.js\\$/,
+          },
+        ],
+      },
+    ],
+  },
+}
+`;
+
 exports[`should return in .oneOf rules sent in .rules 1`] = `
 Object {
   "module": Object {

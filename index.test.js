@@ -30,6 +30,24 @@ it('should add condition to Next.js built-in oneOf rule that adds CSS support', 
     expect(webpackConfig).toMatchSnapshot();
 });
 
+it('should not wrap rule that has `resolve.fullySpecified = false`', () => {
+    const rules = [
+        {
+            test: /\.m?js/,
+            resolve: {
+                fullySpecified: false,
+            },
+        },
+        {
+            test: /\.js$/,
+        },
+    ];
+
+    const webpackConfig = alwaysOneOf().webpack(createConfig(rules));
+
+    expect(webpackConfig).toMatchSnapshot();
+});
+
 it('should call nextConfig webpack if defined', () => {
     const nextConfig = {
         webpack: jest.fn(() => 'foo'),
