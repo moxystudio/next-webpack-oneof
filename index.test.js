@@ -48,6 +48,19 @@ it('should not wrap rule that has `resolve.fullySpecified = false`', () => {
     expect(webpackConfig).toMatchSnapshot();
 });
 
+it('should add noop SVG rule at the root if a SVG rule was detected', () => {
+    const rules = [
+        {
+            test: /\.svg$/,
+            loader: 'foo',
+        },
+    ];
+
+    const webpackConfig = alwaysOneOf().webpack(createConfig(rules));
+
+    expect(webpackConfig).toMatchSnapshot();
+});
+
 it('should call nextConfig webpack if defined', () => {
     const nextConfig = {
         webpack: jest.fn(() => 'foo'),

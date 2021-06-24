@@ -21,6 +21,26 @@ Object {
 }
 `;
 
+exports[`should add noop SVG rule at the root if a SVG rule was detected 1`] = `
+Object {
+  "module": Object {
+    "rules": Array [
+      Object {
+        "test": /\\\\\\.svg\\$/,
+      },
+      Object {
+        "oneOf": Array [
+          Object {
+            "loader": "foo",
+            "test": /\\\\\\.svg\\$/,
+          },
+        ],
+      },
+    ],
+  },
+}
+`;
+
 exports[`should not wrap rule that has \`resolve.fullySpecified = false\` 1`] = `
 Object {
   "module": Object {
