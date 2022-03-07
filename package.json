@@ -31,7 +31,7 @@
   },
   "homepage": "https://github.com/moxystudio/next-webpack-oneof#readme",
   "peerDependencies": {
-    "next": ">=8 <=11"
+    "next": "^12"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",
