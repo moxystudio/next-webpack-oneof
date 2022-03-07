@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/moxystudio/next-webpack-oneof/compare/v1.1.1...v2.0.0) (2022-03-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* support next 12 (#12)
+
+### Features
+
+* support next 12 ([#12](https://github.com/moxystudio/next-webpack-oneof/issues/12)) ([22e7ab6](https://github.com/moxystudio/next-webpack-oneof/commit/22e7ab6d5473acf0670f943ea1ab176abae4e518))
+
 ### [1.1.1](https://github.com/moxystudio/next-webpack-oneof/compare/v1.1.0...v1.1.1) (2021-06-24)
 
 
