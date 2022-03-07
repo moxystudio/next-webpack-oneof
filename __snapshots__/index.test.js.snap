@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should add condition to Next.js built-in oneOf rule that adds CSS support 1`] = `
+exports[`should add condition to Next.js built-in oneOf rule that adds JS & CSS support 1`] = `
 Object {
   "module": Object {
     "rules": Array [
@@ -9,10 +9,13 @@ Object {
           Object {
             "oneOf": Array [
               Object {
+                "test": /\\\\\\.\\(tsx\\|ts\\|js\\|cjs\\|mjs\\|jsx\\)\\$/,
+              },
+              Object {
                 "test": /\\\\\\.module\\\\\\.css\\$/,
               },
             ],
-            "test": /\\\\\\.css\\$/,
+            "test": /\\\\\\.\\(tsx\\|ts\\|js\\|cjs\\|mjs\\|jsx\\|css\\|scss\\|sass\\)\\$/,
           },
         ],
       },
@@ -41,7 +44,7 @@ Object {
 }
 `;
 
-exports[`should not wrap rule that has \`resolve.fullySpecified = false\` 1`] = `
+exports[`should not wrap rule JS rules that should be fallthrough 1`] = `
 Object {
   "module": Object {
     "rules": Array [
@@ -52,9 +55,21 @@ Object {
         "test": /\\\\\\.m\\?js/,
       },
       Object {
+        "issuerLayer": "api",
+        "test": /\\\\\\.\\(js\\|cjs\\|mjs\\)\\$/,
+      },
+      Object {
         "oneOf": Array [
           Object {
-            "test": /\\\\\\.js\\$/,
+            "oneOf": Array [
+              Object {
+                "test": /\\\\\\.\\(tsx\\|ts\\|js\\|cjs\\|mjs\\|jsx\\)\\$/,
+              },
+              Object {
+                "test": /\\\\\\.module\\\\\\.css\\$/,
+              },
+            ],
+            "test": /\\\\\\.\\(tsx\\|ts\\|js\\|cjs\\|mjs\\|jsx\\|css\\|scss\\|sass\\)\\$/,
           },
         ],
       },

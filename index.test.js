@@ -18,11 +18,16 @@ it('should return in .oneOf rules sent in .rules', () => {
     expect(webpackConfig).toMatchSnapshot();
 });
 
-it('should add condition to Next.js built-in oneOf rule that adds CSS support', () => {
+it('should add condition to Next.js built-in oneOf rule that adds JS & CSS support', () => {
     const rules = [{
-        oneOf: [{
-            test: /\.module\.css$/,
-        }],
+        oneOf: [
+            {
+                test: /\.(tsx|ts|js|cjs|mjs|jsx)$/,
+            },
+            {
+                test: /\.module\.css$/,
+            },
+        ],
     }];
 
     const webpackConfig = alwaysOneOf().webpack(createConfig(rules));
@@ -30,7 +35,7 @@ it('should add condition to Next.js built-in oneOf rule that adds CSS support', 
     expect(webpackConfig).toMatchSnapshot();
 });
 
-it('should not wrap rule that has `resolve.fullySpecified = false`', () => {
+it('should not wrap rule JS rules that should be fallthrough', () => {
     const rules = [
         {
             test: /\.m?js/,
@@ -39,7 +44,18 @@ it('should not wrap rule that has `resolve.fullySpecified = false`', () => {
             },
         },
         {
-            test: /\.js$/,
+            test: /\.(js|cjs|mjs)$/,
+            issuerLayer: 'api',
+        },
+        {
+            oneOf: [
+                {
+                    test: /\.(tsx|ts|js|cjs|mjs|jsx)$/,
+                },
+                {
+                    test: /\.module\.css$/,
+                },
+            ],
         },
     ];
 
